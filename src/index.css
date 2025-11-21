@@ -1,5 +1,20 @@
 @import "tailwindcss";
+:root {
+  --color-primary: #00d991;
+}
 
-@theme {
-  --color-primary: "#00D991";
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
+@layer components {
+  .container {
+    padding: 1.25rem;
+    margin: 0 auto;
+  }
+}
+
+@layer utilities {
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
 }
