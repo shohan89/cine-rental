@@ -2,7 +2,6 @@ import { getImgUrl } from '../utils/cine-utility'
 import Rating from './Rating'
 
 export default function MovieCard({ movie }) {
-  console.log("🚀 ~ MovieCard ~ movie:", movie)
   return (
     <figure className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
             <img

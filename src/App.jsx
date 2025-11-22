@@ -1,3 +1,4 @@
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import MovieList from "./components/MovieList";
@@ -15,6 +16,7 @@ function App() {
           {/* <!-- Movie List --> */}
           <MovieList />
 	  </Main>
+	  <Footer />
     </>
   );
 }
