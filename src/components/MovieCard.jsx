@@ -5,20 +5,24 @@ import Rating from "./Rating";
 
 export default function MovieCard({ movie }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedMovie, setSelectedMovie] = useState(null);
+
     // Modal open handler
-    function handleModalOpen() {
+    function handleModalOpen(moviee) {
+        setSelectedMovie(moviee);
         setIsModalOpen(true);
     }
 
     // Modal close handler
     function handleModalClose() {
+        setSelectedMovie(null);
         setIsModalOpen(false);
     }
   return (
     <>
-      {isModalOpen && (<MovieDetailsModal onClose={handleModalClose}/>)}
+      {isModalOpen && (<MovieDetailsModal movie={selectedMovie} onClose={handleModalClose}/>)}
       <figure className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
-        <a onClick={handleModalOpen} href="#">
+        <a onClick={() => handleModalOpen(movie)} href="#">
         <img
           className="w-full object-cover"
           src={getImgUrl(movie.cover)}
