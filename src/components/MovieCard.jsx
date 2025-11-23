@@ -37,7 +37,7 @@ export default function MovieCard({ movie }) {
     }
   return (
     <>
-      {isModalOpen ? (<MovieDetailsModal movie={selectedMovie} onClose={handleModalClose}/>) : (<figure className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
+      {isModalOpen ? (<MovieDetailsModal movie={selectedMovie} onClose={handleModalClose} onAddCart={(e) => handleAddToCart(e, movie)}/>) : (<figure className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
         <a onClick={() => handleModalOpen(movie)} href="#">
         <img
           className="w-full object-cover"
