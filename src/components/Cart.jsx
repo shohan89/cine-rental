@@ -22,37 +22,41 @@ export default function Cart({ onClose }) {
             Your Carts
           </h2>
           <div className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14">
-            {cartDetails.map((movie) => (
-              <div key={movie.id} className="grid grid-cols-[1fr_auto] gap-4">
-                <div className="flex items-center gap-4">
-                  <img
-                    className="rounded overflow-hidden"
-                    src={getImgUrl(movie.cover)}
-                    alt={movie.title}
-                    width={"50px"}
-                    height={"50px"}
-                  />
-                  <div>
-                    <h3 className="text-base md:text-xl font-bold">
-                      {movie.title}
-                    </h3>
-                    <p className="max-md:text-xs text-[#575A6E]">
-                      {movie.genre}
-                    </p>
-                    <span className="max-md:text-xs">${movie.price}</span>
+            {cartDetails.length === 0 ? (
+              <h3 className="text-3xl font-semibold text-red-600">Ops! Cart is empty.</h3>
+            ) : (
+              cartDetails.map((movie) => (
+                <div key={movie.id} className="grid grid-cols-[1fr_auto] gap-4">
+                  <div className="flex items-center gap-4">
+                    <img
+                      className="rounded overflow-hidden"
+                      src={getImgUrl(movie.cover)}
+                      alt={movie.title}
+                      width={"50px"}
+                      height={"50px"}
+                    />
+                    <div>
+                      <h3 className="text-base md:text-xl font-bold">
+                        {movie.title}
+                      </h3>
+                      <p className="max-md:text-xs text-[#575A6E]">
+                        {movie.genre}
+                      </p>
+                      <span className="max-md:text-xs">${movie.price}</span>
+                    </div>
+                  </div>
+                  <div className="flex justify-between gap-4 items-center">
+                    <button
+                      onClick={(e) => handleRemoveFromCart(e, movie.id)}
+                      className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
+                    >
+                      <img className="w-5 h-5" src={Remove} alt="" />
+                      <span className="max-md:hidden">Remove</span>
+                    </button>
                   </div>
                 </div>
-                <div className="flex justify-between gap-4 items-center">
-                  <button
-                    onClick={(e) => handleRemoveFromCart(e, movie.id)}
-                    className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
-                  >
-                    <img className="w-5 h-5" src={Remove} alt="" />
-                    <span className="max-md:hidden">Remove</span>
-                  </button>
-                </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
           <div className="flex items-center justify-end gap-2">
             <a
