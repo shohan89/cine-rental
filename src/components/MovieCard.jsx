@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { MovieContext } from "../context";
 import { getImgUrl } from "../utils/cine-utility";
 import MovieDetailsModal from "./MovieDetailsModal";
 import Rating from "./Rating";
@@ -6,6 +7,8 @@ import Rating from "./Rating";
 export default function MovieCard({ movie }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
+
+    const { cartDetails, setCartDetails } = useContext(MovieContext);
 
     // Modal open handler
     function handleModalOpen(moviee) {
@@ -17,6 +20,20 @@ export default function MovieCard({ movie }) {
     function handleModalClose() {
         setSelectedMovie(null);
         setIsModalOpen(false);
+    }
+
+    function handleAddToCart(e, movie) {
+      e.stopPropagation();
+      // check if movie is already in cart
+      const isMovieInCart = cartDetails.find((item) => {
+        return item.id === movie.id;
+      })
+
+      if(!isMovieInCart) {
+        setCartDetails([...cartDetails, movie]);
+      } else {
+        alert(`${movie.title} is already added to the cart.`);
+      }
     }
   return (
     <>
@@ -34,6 +51,7 @@ export default function MovieCard({ movie }) {
             <Rating value={movie.rating} />
           </div>
           <a
+            onClick={(e) => handleAddToCart(e,movie)}
             className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
             href="#"
           >

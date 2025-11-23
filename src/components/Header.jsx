@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Moon from "../assets/icons/moon.svg";
 import Logo from "../assets/logo.svg";
 import Ring from "../assets/ring.svg";
 import ShoppingCart from "../assets/shopping-cart.svg";
+import { MovieContext } from "../context";
 import Cart from "./Cart";
 
 export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const {cartDetails} = useContext(MovieContext);
 
   // cart open handler
   function handleCartOpen() {
@@ -49,6 +52,11 @@ export default function Header() {
 				onClick={handleCartOpen}
               >
                 <img src={ShoppingCart} width="24" height="24" alt="" />
+                {
+                  cartDetails.length > 0 && (
+                    <span className="bg-red-500 text-white text-xs font-semibold rounded-full px-1.5 py-0.5 absolute top-0 -right-2">{cartDetails.length}</span>
+                  )
+                }
               </a>
             </li>
           </ul>
